@@ -1,8 +1,12 @@
-name = Media
-description = Standard configuration and functionality related to media.
+name = Metatag
+description = Standard configuration and functionality related to metatag.
 package = ImageX
 core = 7.x
 version = 7.x-1.0
-project = imagex_media
+project = imagex_metatag
 
 dependencies[] = metatag
+dependencies[] = metatag_context
+dependencies[] = metatag_panels
+dependencies[] = metatag_views
+dependencies[] = metatag_ui
