@@ -2,3 +2,28 @@
 /**
  * @file
  */
+
+/**
+ * Implements hook_form_alter().
+ */
+function imagex_metatag_form_globalredirect_settings_alter(&$form, $form_state) {
+  // Disallow the canonical url setting to be displayed, force as FALSE at all
+  // times so that the Global Redirect canonical does not conflict with
+  // that of the Metatag configuration.
+  $form['settings']['canonical'] = array(
+    '#type' => 'value',
+    '#default_value' => FALSE,
+  );
+}
+
+/**
+ * Implements hook_modules_enabled().
+ */
+function imagex_metatag_modules_enabled($modules) {
+  // Disable the canonical setting from Global Redirect upon it being enabled.
+  if (in_array('globalredirect', $modules)) {
+    $globalredirect_settings = _globalredirect_get_settings();
+    $globalredirect_settings['canonical'] = FALSE;
+    variable_set('globalredirect_settings', $globalredirect_settings);
+  }
+}
